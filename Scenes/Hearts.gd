@@ -2,6 +2,7 @@ extends KinematicBody2D
 
 var speed = 100  # Adjust the speed value as needed
 
+
 func _process(delta):
 	var motion = Vector2.ZERO
 
@@ -18,3 +19,9 @@ func _process(delta):
 	
 	motion = motion.normalized() * speed * delta
 	move_and_collide(motion)
+
+
+func _on_Area2D_area_entered(area):
+	if area.get_parent().name.begins_with("OneWay"):
+		print("YES COLLIDED with OneWay")
+	pass

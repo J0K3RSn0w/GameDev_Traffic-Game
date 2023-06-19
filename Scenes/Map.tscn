@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://Resources/Tile Sets/RoadTileSet.tres" type="TileSet" id=1]
 [ext_resource path="res://Resources/Tile Sets/CurbTileSet.tres" type="TileSet" id=2]
@@ -9,12 +9,23 @@
 [ext_resource path="res://Assets/Hearts/hud_heartFull.png" type="Texture" id=7]
 [ext_resource path="res://Scenes/CarBody.gd" type="Script" id=8]
 [ext_resource path="res://Scenes/Hearts.gd" type="Script" id=9]
+[ext_resource path="res://Resources/Traffic Signs/One way.png" type="Texture" id=10]
+[ext_resource path="res://Scenes/WindowDialog.gd" type="Script" id=11]
+[ext_resource path="res://Scenes/Score.gd" type="Script" id=12]
 
 [sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 7, 13 )
 
+[sub_resource type="RectangleShape2D" id=4]
+extents = Vector2( 8, 14 )
+
 [sub_resource type="RectangleShape2D" id=3]
 extents = Vector2( 7, 13 )
+
+[sub_resource type="RectangleShape2D" id=6]
+extents = Vector2( 8, 14 )
+
+[sub_resource type="RectangleShape2D" id=5]
 
 [node name="Map" type="Node2D"]
 
@@ -92,6 +103,11 @@ zoom = Vector2( 0.25, 0.25 )
 limit_left = 0
 limit_top = 0
 
+[node name="Area2D" type="Area2D" parent="KinematicBody2D"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="KinematicBody2D/Area2D"]
+shape = SubResource( 4 )
+
 [node name="KinematicBody2D2" type="KinematicBody2D" parent="."]
 position = Vector2( 144, 534 )
 collision_layer = 2
@@ -129,3 +145,65 @@ stretch_mode = 3
 [node name="CollisionShape2DHeart" type="CollisionShape2D" parent="KinematicBody2D2"]
 light_mask = 2
 shape = SubResource( 3 )
+
+[node name="Score" type="Label" parent="KinematicBody2D2"]
+margin_left = 62.0
+margin_top = -70.0
+margin_right = 103.0
+margin_bottom = -56.0
+text = "SCORE"
+script = ExtResource( 12 )
+
+[node name="Area2D" type="Area2D" parent="KinematicBody2D2"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="KinematicBody2D2/Area2D"]
+shape = SubResource( 6 )
+
+[node name="OneWay" type="Node2D" parent="."]
+
+[node name="Area2D" type="Area2D" parent="OneWay"]
+position = Vector2( 1, 1 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="OneWay/Area2D"]
+position = Vector2( 138, 405 )
+shape = SubResource( 5 )
+
+[node name="WindowDialog" type="WindowDialog" parent="."]
+visible = true
+margin_left = 79.0
+margin_top = 387.0
+margin_right = 189.0
+margin_bottom = 452.0
+script = ExtResource( 11 )
+
+[node name="ButtonYes" type="Button" parent="WindowDialog"]
+margin_left = 3.0
+margin_top = 40.0
+margin_right = 37.0
+margin_bottom = 60.0
+text = "yes"
+
+[node name="ButtonNo" type="Button" parent="WindowDialog"]
+margin_left = 77.0
+margin_top = 40.0
+margin_right = 107.0
+margin_bottom = 60.0
+text = "no"
+
+[node name="OneWay" type="Sprite" parent="WindowDialog"]
+position = Vector2( 57.0469, 46.1094 )
+scale = Vector2( 0.0848214, 0.0722834 )
+texture = ExtResource( 10 )
+
+[node name="RichTextLabel" type="RichTextLabel" parent="WindowDialog"]
+margin_left = 10.0
+margin_top = 2.0
+margin_right = 104.0
+margin_bottom = 42.0
+text = "Allowed to go left or right ?"
+
+[connection signal="area_entered" from="KinematicBody2D/Area2D" to="KinematicBody2D" method="_on_Area2D_area_entered"]
+[connection signal="area_entered" from="KinematicBody2D2/Area2D" to="KinematicBody2D2" method="_on_Area2D_area_entered"]
+[connection signal="area_entered" from="KinematicBody2D2/Area2D" to="WindowDialog" method="_on_Area2D_area_entered"]
+[connection signal="button_up" from="WindowDialog/ButtonYes" to="WindowDialog" method="_on_ButtonYes_button_up"]
+[connection signal="button_up" from="WindowDialog/ButtonNo" to="WindowDialog" method="_on_ButtonNo_button_up"]

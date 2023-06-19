@@ -8,7 +8,6 @@ var heart_full = preload("res://assets/Hearts/hud_heartFull.png")
 var heart_empty = preload("res://assets/Hearts/hud_heartEmpty.png")
 var hbox: HBoxContainer
 var pictures: Array
-
 var currentVisibleIndex = 0
 
 func _ready():
@@ -46,3 +45,11 @@ func _process(delta):
 		rotation = motion.angle() + deg2rad(90)
 
 
+func _on_Area2D_area_entered(area):
+	if area.get_parent().name.begins_with("OneWay"):
+		print("YES COLLIDED with OneWay")
+	pass
+
+
+func _on_WindowDialog_popup_hide():
+	pass # Replace with function body.
