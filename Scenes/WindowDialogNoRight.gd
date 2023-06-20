@@ -27,4 +27,3 @@ func _on_ButtonNo_button_up():
 	else:
 		Global.score -= 1
 	pass 
-	pass 
