@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=38 format=2]
 
 [ext_resource path="res://Resources/Tile Sets/RoadTileSet.tres" type="TileSet" id=1]
 [ext_resource path="res://Resources/Tile Sets/CurbTileSet.tres" type="TileSet" id=2]
@@ -12,6 +12,18 @@
 [ext_resource path="res://Resources/Traffic Signs/One way.png" type="Texture" id=10]
 [ext_resource path="res://Scenes/WindowDialog.gd" type="Script" id=11]
 [ext_resource path="res://Scenes/Score.gd" type="Script" id=12]
+[ext_resource path="res://Scenes/WindowDialogRightOnly.gd" type="Script" id=13]
+[ext_resource path="res://Resources/Traffic Signs/Right only.png" type="Texture" id=14]
+[ext_resource path="res://Scenes/WindowDialogVerboden.gd" type="Script" id=15]
+[ext_resource path="res://Resources/Traffic Signs/Verboden.png" type="Texture" id=16]
+[ext_resource path="res://Scenes/WindowDialogNoRight.gd" type="Script" id=17]
+[ext_resource path="res://Resources/Traffic Signs/No Right.png" type="Texture" id=18]
+[ext_resource path="res://Scenes/WindowDialogSpeedLimit.gd" type="Script" id=19]
+[ext_resource path="res://Resources/Traffic Signs/Speed limit.png" type="Texture" id=20]
+[ext_resource path="res://Resources/Traffic Signs/STOP.png" type="Texture" id=21]
+[ext_resource path="res://Scenes/WindowDialogStop.gd" type="Script" id=22]
+[ext_resource path="res://Scenes/Finish.gd" type="Script" id=23]
+[ext_resource path="res://Resources/Traffic Signs/finish.png" type="Texture" id=24]
 
 [sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 7, 13 )
@@ -26,6 +38,31 @@ extents = Vector2( 7, 13 )
 extents = Vector2( 8, 14 )
 
 [sub_resource type="RectangleShape2D" id=5]
+extents = Vector2( 20.7188, 7.5 )
+
+[sub_resource type="RectangleShape2D" id=7]
+extents = Vector2( 6.5, 17.5 )
+
+[sub_resource type="RectangleShape2D" id=8]
+extents = Vector2( 21, 7.5 )
+
+[sub_resource type="RectangleShape2D" id=9]
+extents = Vector2( 8, 18 )
+
+[sub_resource type="RectangleShape2D" id=10]
+extents = Vector2( 6, 35.375 )
+
+[sub_resource type="RectangleShape2D" id=11]
+extents = Vector2( 8, 16.5 )
+
+[sub_resource type="RectangleShape2D" id=12]
+extents = Vector2( 38.5, 4.5625 )
+
+[sub_resource type="RectangleShape2D" id=13]
+extents = Vector2( 2, 38.5 )
+
+[sub_resource type="RectangleShape2D" id=14]
+extents = Vector2( 34.5, 5 )
 
 [node name="Map" type="Node2D"]
 
@@ -165,15 +202,23 @@ shape = SubResource( 6 )
 position = Vector2( 1, 1 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="OneWay/Area2D"]
-position = Vector2( 138, 405 )
+position = Vector2( 133.719, 452 )
+shape = SubResource( 5 )
+
+[node name="OnlyRight" type="Node2D" parent="."]
+
+[node name="Area2D" type="Area2D" parent="OnlyRight"]
+position = Vector2( 1, 1 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="OnlyRight/Area2D"]
+position = Vector2( 138.813, 150.5 )
 shape = SubResource( 5 )
 
 [node name="WindowDialog" type="WindowDialog" parent="."]
-visible = true
-margin_left = 79.0
-margin_top = 387.0
-margin_right = 189.0
-margin_bottom = 452.0
+margin_left = 72.0
+margin_top = 449.0
+margin_right = 182.0
+margin_bottom = 514.0
 script = ExtResource( 11 )
 
 [node name="ButtonYes" type="Button" parent="WindowDialog"]
@@ -202,8 +247,369 @@ margin_right = 104.0
 margin_bottom = 42.0
 text = "Allowed to go left or right ?"
 
+[node name="WindowDialogRightOnly" type="WindowDialog" parent="."]
+margin_left = 69.0
+margin_top = 125.0
+margin_right = 179.0
+margin_bottom = 190.0
+script = ExtResource( 13 )
+
+[node name="RightOnly2" type="Sprite" parent="WindowDialogRightOnly"]
+position = Vector2( 55.1563, 48 )
+scale = Vector2( 0.0841565, 0.0792683 )
+texture = ExtResource( 14 )
+
+[node name="ButtonYes" type="Button" parent="WindowDialogRightOnly"]
+margin_left = 3.0
+margin_top = 40.0
+margin_right = 37.0
+margin_bottom = 60.0
+text = "yes"
+
+[node name="ButtonNo" type="Button" parent="WindowDialogRightOnly"]
+margin_left = 77.0
+margin_top = 40.0
+margin_right = 107.0
+margin_bottom = 60.0
+text = "no"
+
+[node name="OneWay" type="Sprite" parent="WindowDialogRightOnly/ButtonNo"]
+position = Vector2( 40, 236 )
+texture = ExtResource( 10 )
+
+[node name="OneWay2" type="Sprite" parent="WindowDialogRightOnly/ButtonNo"]
+position = Vector2( 65, 282 )
+texture = ExtResource( 10 )
+
+[node name="RichTextLabel" type="RichTextLabel" parent="WindowDialogRightOnly"]
+margin_left = 9.0
+margin_top = 1.0
+margin_right = 103.0
+margin_bottom = 41.0
+text = "Allowed to go straight?"
+
+[node name="RightOnlySprite" type="Sprite" parent="."]
+position = Vector2( 167.5, 151.953 )
+scale = Vector2( 0.0455927, 0.0490676 )
+texture = ExtResource( 14 )
+
+[node name="OneWaySprite" type="Sprite" parent="."]
+position = Vector2( 167.5, 455.438 )
+scale = Vector2( 0.0455927, 0.0398936 )
+texture = ExtResource( 10 )
+
+[node name="VerbodenSprite" type="Sprite" parent="."]
+position = Vector2( 375.949, 151.949 )
+rotation = 1.5708
+scale = Vector2( 0.0471528, 0.0499873 )
+texture = ExtResource( 16 )
+
+[node name="Verboden" type="Node2D" parent="."]
+
+[node name="Area2D" type="Area2D" parent="Verboden"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Verboden/Area2D"]
+position = Vector2( 371.5, 123 )
+shape = SubResource( 7 )
+
+[node name="WindowDialogVerboden" type="WindowDialog" parent="."]
+margin_left = 277.0
+margin_top = 73.0
+margin_right = 387.0
+margin_bottom = 138.0
+script = ExtResource( 15 )
+
+[node name="ButtonYes" type="Button" parent="WindowDialogVerboden"]
+margin_left = 3.0
+margin_top = 40.0
+margin_right = 37.0
+margin_bottom = 60.0
+text = "yes"
+
+[node name="ButtonNo" type="Button" parent="WindowDialogVerboden"]
+margin_left = 77.0
+margin_top = 40.0
+margin_right = 107.0
+margin_bottom = 60.0
+text = "no"
+
+[node name="RichTextLabel" type="RichTextLabel" parent="WindowDialogVerboden"]
+margin_left = 9.0
+margin_top = 1.0
+margin_right = 103.0
+margin_bottom = 41.0
+text = "Allowed to enter street?"
+
+[node name="VerbodenSprite" type="Sprite" parent="WindowDialogVerboden"]
+position = Vector2( 55, 48 )
+rotation = -3.14159
+scale = Vector2( 0.0852686, 0.0811942 )
+texture = ExtResource( 16 )
+
+[node name="RightOnlySprite2" type="Sprite" parent="."]
+position = Vector2( 279.981, 152.211 )
+rotation = 1.5708
+scale = Vector2( 0.0484193, 0.0478445 )
+texture = ExtResource( 14 )
+
+[node name="NoRightSprite" type="Sprite" parent="."]
+position = Vector2( 280.205, 359.854 )
+rotation = 3.14159
+scale = Vector2( 0.0412987, 0.0392077 )
+texture = ExtResource( 18 )
+
+[node name="NoRight" type="Node2D" parent="."]
+
+[node name="Area2D" type="Area2D" parent="NoRight"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="NoRight/Area2D"]
+position = Vector2( 311, 356 )
+shape = SubResource( 8 )
+
+[node name="WindowDialogNoRight" type="WindowDialog" parent="."]
+margin_left = 274.0
+margin_top = 327.0
+margin_right = 384.0
+margin_bottom = 392.0
+script = ExtResource( 17 )
+
+[node name="ButtonYes" type="Button" parent="WindowDialogNoRight"]
+margin_left = 3.0
+margin_top = 40.0
+margin_right = 37.0
+margin_bottom = 60.0
+text = "yes"
+
+[node name="ButtonNo" type="Button" parent="WindowDialogNoRight"]
+margin_left = 77.0
+margin_top = 40.0
+margin_right = 107.0
+margin_bottom = 60.0
+text = "no"
+
+[node name="RichTextLabel" type="RichTextLabel" parent="WindowDialogNoRight"]
+margin_left = 9.0
+margin_top = 1.0
+margin_right = 103.0
+margin_bottom = 41.0
+text = "Allowed to go left?"
+
+[node name="NoRight2" type="Sprite" parent="WindowDialogNoRight"]
+position = Vector2( 56, 48 )
+rotation = -3.14159
+scale = Vector2( 0.0794831, 0.0700244 )
+texture = ExtResource( 18 )
+
+[node name="OneWaySprite2" type="Sprite" parent="."]
+position = Vector2( 375.949, 455.475 )
+rotation = 1.5708
+scale = Vector2( 0.0447237, 0.0487492 )
+texture = ExtResource( 10 )
+
+[node name="OneWaySprite3" type="Sprite" parent="."]
+position = Vector2( 584.382, 456.066 )
+rotation = 1.5708
+scale = Vector2( 0.0486217, 0.0494498 )
+texture = ExtResource( 10 )
+
+[node name="SpeedLimitSprite" type="Sprite" parent="."]
+position = Vector2( 488.168, 456 )
+rotation = -4.71239
+scale = Vector2( 0.0446829, 0.0483418 )
+texture = ExtResource( 20 )
+
+[node name="SpeedLimit" type="Node2D" parent="."]
+
+[node name="Area2D" type="Area2D" parent="SpeedLimit"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SpeedLimit/Area2D"]
+position = Vector2( 488, 426 )
+shape = SubResource( 9 )
+
+[node name="WindowDialogSpeedLimit" type="WindowDialog" parent="."]
+margin_left = 406.0
+margin_top = 379.0
+margin_right = 526.0
+margin_bottom = 449.0
+script = ExtResource( 19 )
+
+[node name="ButtonYes" type="Button" parent="WindowDialogSpeedLimit"]
+margin_left = 2.0
+margin_top = 45.0
+margin_right = 36.0
+margin_bottom = 65.0
+text = "yes"
+
+[node name="ButtonNo" type="Button" parent="WindowDialogSpeedLimit"]
+margin_left = 84.0
+margin_top = 46.0
+margin_right = 114.0
+margin_bottom = 66.0
+text = "no"
+
+[node name="RichTextLabel" type="RichTextLabel" parent="WindowDialogSpeedLimit"]
+margin_left = 12.0
+margin_top = 1.0
+margin_right = 88.0
+margin_bottom = 47.0
+text = "Allowed to surpass 80 km/h?"
+
+[node name="SpeedLimit" type="Sprite" parent="WindowDialogSpeedLimit"]
+position = Vector2( 58.2813, 54.5 )
+scale = Vector2( 0.0838675, 0.071225 )
+texture = ExtResource( 20 )
+
+[node name="KinematicBody2DVerboden" type="KinematicBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="KinematicBody2DVerboden"]
+position = Vector2( 173, 408.625 )
+shape = SubResource( 10 )
+
+[node name="StopSprite" type="Sprite" parent="."]
+position = Vector2( 647.875, 456.25 )
+rotation = 1.5708
+scale = Vector2( 0.0420507, 0.0474507 )
+texture = ExtResource( 21 )
+
+[node name="VerbodenSprite2" type="Sprite" parent="."]
+position = Vector2( 376.338, 327.662 )
+rotation = 1.5708
+scale = Vector2( 0.0431152, 0.0459621 )
+texture = ExtResource( 16 )
+
+[node name="VerbodenSprite3" type="Sprite" parent="."]
+position = Vector2( 584, 359 )
+rotation = 1.5708
+scale = Vector2( 0.0471528, 0.0499873 )
+texture = ExtResource( 16 )
+
+[node name="VerbodenSprite4" type="Sprite" parent="."]
+position = Vector2( 648, 151 )
+rotation = 1.5708
+scale = Vector2( 0.0471528, 0.0499873 )
+texture = ExtResource( 16 )
+
+[node name="VerbodenSprite5" type="Sprite" parent="."]
+position = Vector2( 487, 232 )
+rotation = 1.5708
+scale = Vector2( 0.0471528, 0.0499873 )
+texture = ExtResource( 16 )
+
+[node name="VerbodenSprite6" type="Sprite" parent="."]
+position = Vector2( 280.133, 456.611 )
+scale = Vector2( 0.0479666, 0.0462702 )
+texture = ExtResource( 16 )
+
+[node name="VerbodenSprite7" type="Sprite" parent="."]
+position = Vector2( 856, 552.666 )
+rotation = -3.14159
+scale = Vector2( 0.0459317, 0.0462702 )
+texture = ExtResource( 16 )
+
+[node name="Stop" type="Node2D" parent="."]
+
+[node name="Area2D" type="Area2D" parent="Stop"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Stop/Area2D"]
+position = Vector2( 648, 426.5 )
+shape = SubResource( 11 )
+
+[node name="WindowDialogStop" type="WindowDialog" parent="."]
+margin_left = 577.0
+margin_top = 383.0
+margin_right = 697.0
+margin_bottom = 453.0
+script = ExtResource( 22 )
+
+[node name="ButtonYes" type="Button" parent="WindowDialogStop"]
+margin_left = 2.0
+margin_top = 45.0
+margin_right = 36.0
+margin_bottom = 65.0
+text = "yes"
+
+[node name="ButtonNo" type="Button" parent="WindowDialogStop"]
+margin_left = 84.0
+margin_top = 46.0
+margin_right = 114.0
+margin_bottom = 66.0
+text = "no"
+
+[node name="RichTextLabel" type="RichTextLabel" parent="WindowDialogStop"]
+margin_left = 12.0
+margin_top = 1.0
+margin_right = 96.0
+margin_bottom = 36.0
+text = "Stopping mandatory?"
+
+[node name="Stop" type="Sprite" parent="WindowDialogStop"]
+position = Vector2( 60, 52 )
+scale = Vector2( 0.109879, 0.0941311 )
+texture = ExtResource( 21 )
+
+[node name="Finish2" type="Sprite" parent="."]
+position = Vector2( 904, 197 )
+scale = Vector2( 0.0645834, 0.055 )
+texture = ExtResource( 24 )
+
+[node name="Finish" type="Node2D" parent="."]
+script = ExtResource( 23 )
+
+[node name="Area2D" type="Area2D" parent="Finish"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Finish/Area2D"]
+position = Vector2( 904, 196.563 )
+shape = SubResource( 12 )
+
+[node name="KinematicBody2DVerboden2" type="KinematicBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="KinematicBody2DVerboden2"]
+position = Vector2( 396, 104.5 )
+shape = SubResource( 13 )
+
+[node name="KinematicBody2DVerboden3" type="KinematicBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="KinematicBody2DVerboden3"]
+position = Vector2( 643, 105 )
+shape = SubResource( 13 )
+
+[node name="KinematicBody2DVerboden4" type="KinematicBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="KinematicBody2DVerboden4"]
+position = Vector2( 482, 281 )
+shape = SubResource( 13 )
+
+[node name="KinematicBody2DVerboden5" type="KinematicBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="KinematicBody2DVerboden5"]
+position = Vector2( 382, 281 )
+shape = SubResource( 13 )
+
+[node name="KinematicBody2DVerboden6" type="KinematicBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="KinematicBody2DVerboden6"]
+position = Vector2( 535, 352 )
+shape = SubResource( 14 )
+
 [connection signal="area_entered" from="KinematicBody2D/Area2D" to="KinematicBody2D" method="_on_Area2D_area_entered"]
+[connection signal="area_entered" from="KinematicBody2D2/Area2D" to="KinematicBody2D" method="_on_Area2D_area_entered"]
 [connection signal="area_entered" from="KinematicBody2D2/Area2D" to="KinematicBody2D2" method="_on_Area2D_area_entered"]
 [connection signal="area_entered" from="KinematicBody2D2/Area2D" to="WindowDialog" method="_on_Area2D_area_entered"]
+[connection signal="area_entered" from="KinematicBody2D2/Area2D" to="WindowDialogRightOnly" method="_on_Area2D_area_entered"]
+[connection signal="area_entered" from="KinematicBody2D2/Area2D" to="WindowDialogVerboden" method="_on_Area2D_area_entered"]
+[connection signal="area_entered" from="KinematicBody2D2/Area2D" to="WindowDialogNoRight" method="_on_Area2D_area_entered"]
+[connection signal="area_entered" from="KinematicBody2D2/Area2D" to="WindowDialogSpeedLimit" method="_on_Area2D_area_entered"]
+[connection signal="area_entered" from="KinematicBody2D2/Area2D" to="WindowDialogStop" method="_on_Area2D_area_entered"]
+[connection signal="area_entered" from="KinematicBody2D2/Area2D" to="Finish" method="_on_Area2D_area_entered"]
 [connection signal="button_up" from="WindowDialog/ButtonYes" to="WindowDialog" method="_on_ButtonYes_button_up"]
 [connection signal="button_up" from="WindowDialog/ButtonNo" to="WindowDialog" method="_on_ButtonNo_button_up"]
+[connection signal="button_up" from="WindowDialogRightOnly/ButtonYes" to="WindowDialogRightOnly" method="_on_ButtonYes_button_up"]
+[connection signal="button_up" from="WindowDialogRightOnly/ButtonNo" to="WindowDialogRightOnly" method="_on_ButtonNo_button_up"]
+[connection signal="button_up" from="WindowDialogVerboden/ButtonYes" to="WindowDialogVerboden" method="_on_ButtonYes_button_up"]
+[connection signal="button_up" from="WindowDialogVerboden/ButtonNo" to="WindowDialogVerboden" method="_on_ButtonNo_button_up"]
+[connection signal="button_up" from="WindowDialogNoRight/ButtonYes" to="WindowDialogNoRight" method="_on_ButtonYes_button_up"]
+[connection signal="button_up" from="WindowDialogNoRight/ButtonNo" to="WindowDialogNoRight" method="_on_ButtonNo_button_up"]
+[connection signal="button_up" from="WindowDialogSpeedLimit/ButtonYes" to="WindowDialogSpeedLimit" method="_on_ButtonYes_button_up"]
+[connection signal="button_up" from="WindowDialogSpeedLimit/ButtonNo" to="WindowDialogSpeedLimit" method="_on_ButtonNo_button_up"]
+[connection signal="button_up" from="WindowDialogStop/ButtonYes" to="WindowDialogStop" method="_on_ButtonYes_button_up"]
+[connection signal="button_up" from="WindowDialogStop/ButtonNo" to="WindowDialogStop" method="_on_ButtonNo_button_up"]

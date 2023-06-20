@@ -1,6 +1,6 @@
 extends KinematicBody2D
 
-var speed = 100  # Adjust the speed value as needed
+var speed = Global.speedd   # Adjust the speed value as needed
 
 
 func _process(delta):

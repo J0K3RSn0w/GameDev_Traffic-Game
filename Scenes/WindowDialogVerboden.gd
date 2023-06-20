@@ -7,10 +7,9 @@ func _ready():
 
 
 func _on_Area2D_area_entered(area):
-	if area.get_parent().name.begins_with("OneWay"):
+	if area.get_parent().name.begins_with("Verboden"):
 		show()
 	pass
-
 
 
 func _on_ButtonYes_button_up():
@@ -19,6 +18,7 @@ func _on_ButtonYes_button_up():
 		Global.score = 0
 	else:
 		Global.score -= 1
+	pass 
 	pass 
 
 

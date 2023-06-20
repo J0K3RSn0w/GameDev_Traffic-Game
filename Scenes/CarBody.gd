@@ -1,6 +1,6 @@
 extends KinematicBody2D
 
-var speed = 100  # Adjust the speed value as needed
+var speed = Global.speedd  # Adjust the speed value as needed
 var rotationSpeed = 180  # Adjust the rotation speed as needed
 var hasCollided = false
 var health = 3
@@ -43,7 +43,7 @@ func _process(delta):
 
 	if motion != Vector2.ZERO:
 		rotation = motion.angle() + deg2rad(90)
-
+	
 
 func _on_Area2D_area_entered(area):
 	if area.get_parent().name.begins_with("OneWay"):

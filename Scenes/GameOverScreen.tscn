@@ -1,6 +1,13 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://GameOver.gd" type="Script" id=1]
+[ext_resource path="res://Scenes/FinishScore.gd" type="Script" id=2]
+[ext_resource path="res://Resources/Font/Kenney Future.ttf" type="DynamicFontData" id=3]
+
+[sub_resource type="DynamicFont" id=1]
+size = 80
+outline_size = 1
+font_data = ExtResource( 3 )
 
 [node name="Node2D" type="Node2D"]
 script = ExtResource( 1 )
@@ -44,3 +51,12 @@ margin_right = 148.0
 margin_bottom = -24.0
 action_mode = 0
 text = "Quit"
+
+[node name="FinishScore" type="Label" parent="HUD"]
+margin_left = 299.0
+margin_top = 213.0
+margin_right = 634.0
+margin_bottom = 317.0
+custom_fonts/font = SubResource( 1 )
+text = "SCORE"
+script = ExtResource( 2 )
