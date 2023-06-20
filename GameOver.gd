@@ -7,9 +7,11 @@ func _ready():
 	buttonQuit.connect("pressed", self, "QuitScene")
 	
 func RestartScene():
+	Global.score = 0
 	var nextScene = "res://Scenes/Map.tscn" # Replace with the path to your next scene
 	get_tree().change_scene(nextScene)
 	
 func QuitScene():
+	Global.score = 0
 	var nextScene = "res://Scenes/StartScene.tscn" # Replace with the path to your next scene
 	get_tree().change_scene(nextScene)
